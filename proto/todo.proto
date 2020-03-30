@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.todo";
+option java_outer_classname = "ToDoProto";
+option objc_class_prefix = "HLW";
+
+package todo;
+
+service TodoService {
+    rpc Save (SaveRequest) returns (SaveResponse) {}
+    rpc Get (GetRequest) returns (GetResponse) {}
+    rpc List (ListRequest) returns (ListResponse) {}
+    rpc Update (UpdateRequest) returns (UpdateResponse) {}
+}
+
+message SaveRequest {
+    string detail = 1;
+}
+
+message SaveResponse {
+    bool success = 1;
+    string id = 2;
+}
+
+message GetRequest {
+    string id = 1;
+}
+
+message GetResponse {
+    Todo todo = 1;
+}
+
+message ListRequest {}
+
+
+message ListResponse {
+    repeated Todo todos = 1;
+}
+
+message UpdateRequest {
+    string id = 1;
+    string detail = 2;
+    bool is_done = 3;
+}
+
+message UpdateResponse {}
+
+message Todo {
+    string id = 1;
+    string detail = 2;
+    bool is_done = 3;
+    int64 updated_at = 4;
+}
